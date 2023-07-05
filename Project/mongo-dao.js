@@ -44,17 +44,16 @@ module.exports.findAllCharacters = function (callback) {
   dataPromise.then((characters) => callback(characters));
 };
 
-
 // retrieve a single planet
 module.exports.findPlanet = function (id, callback) {
   let dataPromise = planetsCollection.findOne({ id: +id });
   dataPromise.then((planet) => callback(planet));
+};
 
 // retrieve a single film
 module.exports.findFilm = function (id, callback) {
   let dataPromise = filmsCollection.findOne({ id: +id });
   dataPromise.then((film) => callback(film));
-
 };
 
 // retrieve a single character
@@ -63,8 +62,6 @@ module.exports.findCharacter = function (id, callback) {
   dataPromise.then((character) => callback(character));
 };
 
-
-  
 // retrieve All Characters from a single film
 module.exports.findCharactersFromFilm = function (id, callback) {
   let dataPromise = filmscharactersCollection.find({ film_id: +id }).toArray();
@@ -77,7 +74,6 @@ module.exports.findFilmsofCharacter = function (id, callback) {
     .find({ character_id: +id })
     .toArray();
   dataPromise.then((filmsOfCharacters) => callback(filmsOfCharacters));
-
 };
 
 // retrieve all planets from a film
