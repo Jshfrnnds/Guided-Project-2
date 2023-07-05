@@ -26,7 +26,6 @@ app.get("/api/films", (req, res) => {
   });
 });
 
-
 // index.js GET AllCharacters
 app.get("/api/characters", (req, res) => {
   dao.findAllCharacters((characters) => {
@@ -34,6 +33,9 @@ app.get("/api/characters", (req, res) => {
       res.status(404).end();
     } else {
       res.send(characters);
+    }
+  });
+});
 
 // server.js get ONE Film
 app.get("/api/films/:id", (req, res) => {
@@ -42,11 +44,9 @@ app.get("/api/films/:id", (req, res) => {
       res.status(404).end();
     } else {
       res.send(film);
-
     }
   });
 });
-
 
 // index.js GET One Planet
 app.get("/api/planets/:id", (req, res) => {
@@ -59,7 +59,6 @@ app.get("/api/planets/:id", (req, res) => {
   });
 });
 
-
 // server.js get ONE Character
 app.get("/api/characters/:id", (req, res) => {
   dao.findCharacter(req.params.id, (character) => {
@@ -70,7 +69,7 @@ app.get("/api/characters/:id", (req, res) => {
     }
   });
 });
-      
+
 // index.js GET all planets from a film
 app.get("/api/films/:id/planets", (req, res) => {
   dao.findPlanetsFromFilm(req.params.id, (filmPlanet) => {
@@ -89,6 +88,9 @@ app.get("/api/planets/:id/films", (req, res) => {
       res.status(404).end();
     } else {
       res.send(planetFilm);
+    }
+  });
+});
 
 // server.js get All Characters in ONE Film
 app.get("/api/films/:id/characters", (req, res) => {
@@ -101,7 +103,6 @@ app.get("/api/films/:id/characters", (req, res) => {
   });
 });
 
-
 // index.js GET all characters from a planet
 app.get("/api/planets/:id/characters", (req, res) => {
   dao.findCharactersFromPlanet(req.params.id, (planetChar) => {
@@ -109,6 +110,9 @@ app.get("/api/planets/:id/characters", (req, res) => {
       res.status(404).end();
     } else {
       res.send(planetChar);
+    }
+  });
+});
 
 // server.js get All Films of ONE Character
 app.get("/api/characters/:id/films", (req, res) => {
