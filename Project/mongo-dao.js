@@ -44,10 +44,17 @@ module.exports.findAllCharacters = function (callback) {
   dataPromise.then((characters) => callback(characters));
 };
 
+
+// retrieve a single planet
+module.exports.findPlanet = function (id, callback) {
+  let dataPromise = planetsCollection.findOne({ id: +id });
+  dataPromise.then((planet) => callback(planet));
+
 // retrieve a single film
 module.exports.findFilm = function (id, callback) {
   let dataPromise = filmsCollection.findOne({ id: +id });
   dataPromise.then((film) => callback(film));
+
 };
 
 // retrieve a single character
@@ -56,6 +63,8 @@ module.exports.findCharacter = function (id, callback) {
   dataPromise.then((character) => callback(character));
 };
 
+
+  
 // retrieve All Characters from a single film
 module.exports.findCharactersFromFilm = function (id, callback) {
   let dataPromise = filmscharactersCollection.find({ film_id: +id }).toArray();
@@ -68,33 +77,23 @@ module.exports.findFilmsofCharacter = function (id, callback) {
     .find({ character_id: +id })
     .toArray();
   dataPromise.then((filmsOfCharacters) => callback(filmsOfCharacters));
+
 };
 
-// // delete a single book
-// module.exports.deleteBook = function (isbn, callback) {
-//   let dataPromise = collection.deleteOne({ isbn: isbn });
-//   dataPromise.then((ok) => callback(ok));
-// };
+// retrieve all planets from a film
+module.exports.findPlanetsFromFilm = function (id, callback) {
+  let dataPromise = filmsplanetsCollection.find({ film_id: +id }).toArray();
+  dataPromise.then((filmPlanet) => callback(filmPlanet));
+};
 
-// // update a single book
-// module.exports.updateBook = function (isbn, book, callback) {
-//   delete book._id;
-//   let dataPromise = collection.updateOne(
-//     { isbn: isbn },
-//     { $set: book },
-//     { upsert: true },
-//     callback
-//   );
-//   dataPromise.then((ok) => callback(ok));
-// };
+// retrieve all films from a planet
+module.exports.findFilmsFromPlanet = function (id, callback) {
+  let dataPromise = filmsplanetsCollection.find({ planet_id: +id }).toArray();
+  dataPromise.then((planetFilm) => callback(planetFilm));
+};
 
-// // add a single book
-// app.post("/books", (req, res) => {
-//   dao.addBook(req.body, (ok) => {
-//     if (!ok) {
-//       res.status(500).end();
-//     } else {
-//       res.end();
-//     }
-//   });
-// });
+// retrieve all characters from a planet
+module.exports.findCharactersFromPlanet = function (id, callback) {
+  let dataPromise = charactersCollection.find({ homeworld: +id }).toArray();
+  dataPromise.then((planetChar) => callback(planetChar));
+};
