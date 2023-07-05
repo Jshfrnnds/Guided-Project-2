@@ -1,12 +1,18 @@
 var express = require("express");
-// var dao = require("./mongo-dao");
+var dao = require("./mongo-dao");
 var app = express();
 
 app.use(express.json()); //Parse JSON body
 
-// index.js GET AllPlanets
+// index.js GET AllBooks
 app.get("/api/planets", (req, res) => {
-  res.send({ Planet: "Test" });
+  dao.findAllPlanets((planets) => {
+    if (!planets) {
+      res.status(404).end();
+    } else {
+      res.send(planets);
+    }
+  });
 });
 
 // server start-up
