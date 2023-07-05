@@ -32,11 +32,43 @@ module.exports.findAllPlanets = function (callback) {
   dataPromise.then((planets) => callback(planets));
 };
 
-// // retrieve a single book
-// module.exports.findBook = function (isbn, callback) {
-//   let dataPromise = collection.findOne({ isbn: isbn });
-//   dataPromise.then((book) => callback(book));
-// };
+// retrieve all films
+module.exports.findAllFilms = function (callback) {
+  let dataPromise = filmsCollection.find({}).toArray();
+  dataPromise.then((films) => callback(films));
+};
+
+// retrieve all characters
+module.exports.findAllCharacters = function (callback) {
+  let dataPromise = charactersCollection.find({}).toArray();
+  dataPromise.then((characters) => callback(characters));
+};
+
+// retrieve a single film
+module.exports.findFilm = function (id, callback) {
+  let dataPromise = filmsCollection.findOne({ id: +id });
+  dataPromise.then((film) => callback(film));
+};
+
+// retrieve a single character
+module.exports.findCharacter = function (id, callback) {
+  let dataPromise = charactersCollection.findOne({ id: +id });
+  dataPromise.then((character) => callback(character));
+};
+
+// retrieve All Characters from a single film
+module.exports.findCharactersFromFilm = function (id, callback) {
+  let dataPromise = filmscharactersCollection.find({ film_id: +id }).toArray();
+  dataPromise.then((charactersOfFilm) => callback(charactersOfFilm));
+};
+
+// retrieve All Films from a single film character
+module.exports.findFilmsofCharacter = function (id, callback) {
+  let dataPromise = filmscharactersCollection
+    .find({ character_id: +id })
+    .toArray();
+  dataPromise.then((filmsOfCharacters) => callback(filmsOfCharacters));
+};
 
 // // delete a single book
 // module.exports.deleteBook = function (isbn, callback) {
